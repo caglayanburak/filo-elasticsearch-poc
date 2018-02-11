@@ -19,7 +19,7 @@ When you try to go http://localhost:9200 elasticsearch instance has been ready.
 
 If you reach elasticsearch instance from .net core application on docker , you have to change elasticsearch Uri information. Thus you write "docker ps" on terminal  and then choose Container Id of elasticsearch 
 
-Container Id        Image
+Container Id        Image <br>
 c23f10bbdb70        docker.elastic.co/elasticsearch/elasticsearch:6.2.0   ......
 
 I write this container Id "docker inspect" on terminal. after that I find my container IP address and then replace localhost keyword.That is all. Your Containers can talk each others.
