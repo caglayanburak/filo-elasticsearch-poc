@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiloElasticSearchPoc", "FiloElasticSearchPoc\FiloElasticSearchPoc.csproj", "{F9E856A3-A3F7-474C-9CCE-103598197686}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiloElasticSearchUnitTest", "FiloElasticSearchUnitTest\FiloElasticSearchUnitTest.csproj", "{9AD49664-79A5-4A5F-9C97-1E70D9746EEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiloElasticSearchPoc.Repository", "FiloElasticSearchPoc.Repository\FiloElasticSearchPoc.Repository.csproj", "{84262EA9-7477-41DD-9460-EAE74D08B843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{F9E856A3-A3F7-474C-9CCE-103598197686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9E856A3-A3F7-474C-9CCE-103598197686}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9E856A3-A3F7-474C-9CCE-103598197686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD49664-79A5-4A5F-9C97-1E70D9746EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD49664-79A5-4A5F-9C97-1E70D9746EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD49664-79A5-4A5F-9C97-1E70D9746EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD49664-79A5-4A5F-9C97-1E70D9746EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84262EA9-7477-41DD-9460-EAE74D08B843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84262EA9-7477-41DD-9460-EAE74D08B843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84262EA9-7477-41DD-9460-EAE74D08B843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84262EA9-7477-41DD-9460-EAE74D08B843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
