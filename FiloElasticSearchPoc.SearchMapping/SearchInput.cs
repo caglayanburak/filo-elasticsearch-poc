@@ -1,7 +1,10 @@
 ﻿using System;
-namespace FiloElasticSearchPoc.Repository
+using System.Collections.Generic;
+using Nest;
+
+namespace FiloElasticSearchPoc.SearchMapping
 {
-    public class SearchInput:ISearchInput
+    public class SearchInput : ISearchInput
     {
         public SearchInput()
         {
@@ -26,10 +29,20 @@ namespace FiloElasticSearchPoc.Repository
         public string CarModel { get; set; }
         public string Year { get; set; }
         public int CustomerNetId { get; set; }
-    }
 
-    public interface ISearchInput
-    {
-        
+       /* public List<QueryContainer> QueryMapping()
+        {
+            List<QueryContainer> container = new List<QueryContainer>();
+
+            //MatchQuery
+            MatchQueryBuilder<SearchInput> matchQueryBuilder = new MatchQueryBuilder<SearchInput>();
+            var matchQuery = matchQueryBuilder.FieldName(z=>z.Id).SearchValue(this.Id.ToString()).Create();
+            container.Add(matchQuery);
+
+            //TermQuery
+
+
+            return container;
+        }*/
     }
 }

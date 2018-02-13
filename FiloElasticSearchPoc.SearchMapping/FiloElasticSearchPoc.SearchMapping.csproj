@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NEST" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="SearchInput.cs" />
+    <Compile Remove="IRepository.cs" />
+    <Compile Remove="MatchQueryBuilder.cs" />
+    <Compile Remove="QueryBuilder.cs" />
+  </ItemGroup>
+</Project>

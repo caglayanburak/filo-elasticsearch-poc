@@ -56,9 +56,9 @@ namespace FiloElasticSearchPoc.Controllers
 
         [HttpPost]
         [Route("/api/operationeventcustomer/search")]
-        public List<EventCustomer> Search([FromBody]EventCustomer customer)
+        public List<EventCustomer> Search([FromBody]EventCustomer customer, int from, int size)
         {
-            var result = repository.Search(new Repository.SearchInput() { Id = 12, CustomerNameSurname = "Burak Çağlayan" });
+            List<EventCustomer>result = repository.Search(new DTO.SearchRequestDTO(){Id=32},from,size);
             return result;
         }
     }

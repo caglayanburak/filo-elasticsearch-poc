@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FiloElasticSearchPoc.DTO;
 using FiloElasticSearchPoc.Repository;
 using Nest;
 
 namespace FiloElasticSearchPoc.Models
 {
-    public class ElasticRepository<T> where T:class,IEntity
+    public class ElasticRepository<T> where T : class, IEntity
     {
         public ElasticRepository(string defaultIndex)
         {
@@ -29,11 +30,12 @@ namespace FiloElasticSearchPoc.Models
 
         public bool AddMany(List<T> entities)
         {
-            var r = client.Value.IndexMany<T>(entities,defaultIndex);
+            var r = client.Value.IndexMany<T>(entities, defaultIndex);
             return r.IsValid;
         }
 
-        public string Add(T entity){
+        public string Add(T entity)
+        {
 
             var r = client.Value.Index<T>(entity, i => i.Index(defaultIndex));
             return r.Id;
@@ -42,14 +44,14 @@ namespace FiloElasticSearchPoc.Models
         public string Update(T entity)
         {
 
-            var result= client.Value.Update<T, object>(DocumentPath<T>.Id(entity.Id), u => u.Index(defaultIndex).Doc(entity));
+            var result = client.Value.Update<T, object>(DocumentPath<T>.Id(entity.Id), u => u.Index(defaultIndex).Doc(entity));
             return result.Id;
         }
 
         public string Delete(int id)
         {
-            var r = client.Value.Delete<T>(DocumentPath<T>.Id(id),u=>u.Index(defaultIndex));
-            return  r.Id;
+            var r = client.Value.Delete<T>(DocumentPath<T>.Id(id), u => u.Index(defaultIndex));
+            return r.Id;
         }
 
         public void DeleteAll()
@@ -57,19 +59,21 @@ namespace FiloElasticSearchPoc.Models
             client.Value.DeleteIndex(Indices.Index(defaultIndex));
         }
 
-        public List<EventCustomer> Search(FiloElasticSearchPoc.Repository.ISearchInput input)
+        public List<EventCustomer> Search(SearchRequestDTO input, int from, int size)
         {
-            var container = new QueryBuilder().MakeQuery(input);
+            List<QueryContainer> container = new QueryDirector().CreateQuery(input);
+            ISearchRequest request = new SearchRequest<EventCustomer>()
+            {
+                Query = new BoolQuery()
+                {
+                    Must = container
+                },
+                From = from,
+                Size = size
+            };
 
-            ISearchRequest request = new SearchRequest<EventCustomer>(){ 
-                Query = new BoolQuery(){
-                    Must = container 
-                } };
-            
-            var result = client.Value.Search<EventCustomer>(request);
-
-            
-            return result.Documents.ToList();
+            var result = client.Value.Search<EventCustomer>(request).Documents.ToList();
+            return result;
         }
     }
 }

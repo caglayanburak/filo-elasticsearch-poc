@@ -24,10 +24,7 @@ namespace FiloElasticSearchPoc.Repository
 
         public static FieldNameQueryBase Boost(this FieldNameQueryBase query,PropertyInfo pInfo)
         {
-            if(pInfo.GetCustomAttributes().ToList().Any(x => x is BoostAttribute))
-            {
-                query.Boost = ((BoostAttribute)pInfo.GetCustomAttributes().ToList().FirstOrDefault(x => x is BoostAttribute)).Boost;
-            }
+           
             return query;
         }
     }

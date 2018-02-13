@@ -11,6 +11,5 @@ namespace FiloElasticSearchPoc.Repository
         string Update(T entity);
         string Delete(int id);
         void DeleteAll();
-
     }
 }
