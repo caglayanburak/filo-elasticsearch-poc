@@ -1,8 +1,13 @@
 ﻿using System;
 namespace FiloElasticSearchPoc.Models
 {
-    public class EventCustomer:IEntity
+    public class SearchInput
     {
+        public SearchInput()
+        {
+        }
+
+        [BoostAttribute]
         public int Id { get; set; }
         public int ContractId { get; set; }
 
@@ -23,10 +28,5 @@ namespace FiloElasticSearchPoc.Models
         public string CarModel { get; set; }
         public string Year { get; set; }
         public int CustomerNetId { get; set; }
-    }
-
-    public interface IEntity
-    {
-        int Id { get; set; }
     }
 }

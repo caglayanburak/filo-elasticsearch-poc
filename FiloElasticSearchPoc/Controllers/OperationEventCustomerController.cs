@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FiloElasticSearchPoc.Models;
+using FiloElasticSearchPoc.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Nest;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,7 +58,7 @@ namespace FiloElasticSearchPoc.Controllers
         [Route("/api/operationeventcustomer/search")]
         public List<EventCustomer> Search([FromBody]EventCustomer customer)
         {
-            var result = repository.Search(customer.Plate, customer.CustomerNameSurname, customer.ContractId);
+            var result = repository.Search(new Repository.SearchInput() { Id = 12, CustomerNameSurname = "Burak Çağlayan" });
             return result;
         }
     }

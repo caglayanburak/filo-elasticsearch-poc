@@ -21,6 +21,7 @@
   <ItemGroup>
     <Compile Remove="Models\ElasticRepository.cs" />
     <Compile Remove="Models\EventCustomer.cs" />
+    <Compile Remove="Models\SearchInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FiloElasticSearchPoc.Repository\FiloElasticSearchPoc.Repository.csproj" />

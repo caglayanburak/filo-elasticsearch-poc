@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FiloElasticSearchPoc.Repository;
 using Nest;
 
 namespace FiloElasticSearchPoc.Models
 {
     public class ElasticRepository<T> where T:class,IEntity
     {
-        public ElasticRepository(string defaultIndex):this()
+        public ElasticRepository(string defaultIndex)
         {
-            this.defaultIndex = defaultIndex;
+            var uri = new Uri("http://localhost:9200");
+            var settings = new ConnectionSettings(uri);
+            settings.DefaultIndex(defaultIndex);
+            client = new Lazy<ElasticClient>(() => new ElasticClient(settings));
+
         }
         public ElasticRepository()
         {
@@ -52,23 +57,9 @@ namespace FiloElasticSearchPoc.Models
             client.Value.DeleteIndex(Indices.Index(defaultIndex));
         }
 
-        public List<EventCustomer> Search(string plate,string customerNameSurname,int contractId)
+        public List<EventCustomer> Search(FiloElasticSearchPoc.Repository.ISearchInput input)
         {
-            List<QueryContainer> container = new List<QueryContainer>();
-
-            if(!string.IsNullOrEmpty(plate)){
-                container.Add(new MatchQuery(){ Field = "plate", Query = plate });
-            }
-
-            if (!string.IsNullOrEmpty(customerNameSurname))
-            {
-                container.Add(new MatchQuery() { Field = "customerNameSurname", Query = customerNameSurname });
-            }
-
-            if (contractId > 0)
-            {
-                container.Add(new TermQuery() { Field = "contractId", Value = contractId });
-            }
+            var container = new QueryBuilder().MakeQuery(input);
 
             ISearchRequest request = new SearchRequest<EventCustomer>(){ 
                 Query = new BoolQuery(){
@@ -77,29 +68,6 @@ namespace FiloElasticSearchPoc.Models
             
             var result = client.Value.Search<EventCustomer>(request);
 
-            /*var result =  client.Value.Search<EventCustomer>(x=>
-                                               x.Index(defaultIndex)
-                                               .Query(q=>
-                                                      q.Bool(b=>
-                                                             b.Must(m=>
-                                                                    m.Match(ma=>
-                                                                            ma.Field(f=>f.CustomerNameSurname)
-                                                                            .Query(customerNameSurname)
-                                                                           ),
-                                                                    m=>m.Match(ma=>
-                                                                               ma.Field(f=>f.ContractId)
-                                                                               .Query(contractId)
-                                                                              ),
-                                                                    m=>m.Match(ma=>
-                                                                               ma.Field(f=>f.Plate)
-                                                                               .Query(plate)
-                                                                              )
-                                                                )
-                                                         
-                                                         )
-                                                  
-                                                  )
-                                              );*/
             
             return result.Documents.ToList();
         }

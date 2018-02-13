@@ -1,8 +1,11 @@
 ﻿using System;
-namespace FiloElasticSearchPoc.Models
+namespace FiloElasticSearchPoc.Repository
 {
-    public class EventCustomer:IEntity
+    public class SearchInput:ISearchInput
     {
+        public SearchInput()
+        {
+        }
         public int Id { get; set; }
         public int ContractId { get; set; }
 
@@ -25,8 +28,8 @@ namespace FiloElasticSearchPoc.Models
         public int CustomerNetId { get; set; }
     }
 
-    public interface IEntity
+    public interface ISearchInput
     {
-        int Id { get; set; }
+        
     }
 }
